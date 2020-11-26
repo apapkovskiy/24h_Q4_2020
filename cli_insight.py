@@ -34,8 +34,9 @@ def gw(gw, version):
 
 @click.command(help='Udate Gateway configuration')
 @click.option('--gw', required=True, type=(str), help='Gateway ID')
-def conf(gw):
-    url = client.get_url(AssetType.GATEWAY1_APPLICATION, "config")
+@click.option('--name', required=True, type=(str), help='FW version')
+def conf(gw, name):
+    url = client.get_url(AssetType.GATEWAY1_APPLICATION, name)
     resp = client.update_gw_config(gw, url)
     resp = json.loads(resp)
     print(json.dumps(resp, indent=4))
